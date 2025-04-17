@@ -4,19 +4,24 @@ import axios from "axios";
 const Posts = () => {
   // Stato per salvare i post ricevuti dall'API
   const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // Questo useEffect viene eseguito SOLO una volta (al mount del componente)
   useEffect(() => {
     console.log("📡 Inizio fetch dei post...");
+    setLoading(true); //  inizio caricamento
 
     // Chiamata GET all'API esterna
     axios.get("https://jsonplaceholder.typicode.com/posts")
       .then(response => {
         console.log("✅ Post ricevuti:", response.data);
         setPosts(response.data); // Salviamo i dati nello stato
+        setLoading(false); //  fine caricamento
       })
+
       .catch(error => {
         console.error("❌ Errore nel fetch:", error);
+        setLoading(false); //  fine caricamento anche in caso di errore
       });
   }, []);
 
@@ -26,7 +31,7 @@ const Posts = () => {
       <p>Benvenuto nella pagina dei post!</p>
 
       {/* Se non ci sono post ancora → loading */}
-      {posts.length === 0 ? (
+      {loading ? (
         <p>Caricamento...</p>
       ) : (
         <ul>
