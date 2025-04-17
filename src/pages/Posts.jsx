@@ -1,4 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+
+// Importiamo il pacchetto axios per le chiamate API
+
 import axios from "axios";
 
 const Posts = () => {
@@ -37,8 +41,10 @@ const Posts = () => {
         <ul>
           {/* Stampiamo ogni post */}
           {posts.map(post => (
-            <li key={post.id}>
-              <h3>{post.title}</h3>
+             <li key={post.id}>
+              <h3>
+              <Link to={`/posts/${post.id}`}>{post.title}</Link>
+              </h3>
               <p>{post.body}</p>
             </li>
           ))}
