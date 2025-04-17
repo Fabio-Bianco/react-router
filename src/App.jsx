@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import Home from './pages/Home';
 import ChiSiamo from './pages/ChiSiamo';
 import Posts from './pages/Posts';
+import './App.css';
 
 const App = () => {
   return (
